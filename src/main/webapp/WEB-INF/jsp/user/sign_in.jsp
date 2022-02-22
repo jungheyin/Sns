@@ -54,9 +54,18 @@ $(document).ready(function() {
 		// ajax 
 		
 		let url = $(this).attr('action');
-		let param = 
+		let param = $(this).serialize();
 		
 		$.post(url,param)
+		.done(function(data)) {
+			// 응답값
+			if(data.result == 'success') {
+				// 성공
+				location.href = "post/post_list_view";
+			} else {
+				alert('data.error')
+			}
+		}
 
 		 
 	});
