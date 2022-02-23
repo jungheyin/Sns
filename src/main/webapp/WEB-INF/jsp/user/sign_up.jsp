@@ -170,7 +170,7 @@ $(document).ready(function() {
 		let params = $(this).serialize();
 		
 		$.post(url,params)
-		.done(function(data) {
+		.done(function(data)) {
 			// 응답값
 			if (data.result == 'success') {
 				// 성공
@@ -180,7 +180,7 @@ $(document).ready(function() {
 				// 실패
 				alert("회원가입에 실패했습니다. 다시 시도해주세요" ); 
 			}
-		}
+		});
 	});
  
 });

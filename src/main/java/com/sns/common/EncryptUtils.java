@@ -1,6 +1,7 @@
 package com.sns.common;
 
 import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 public class EncryptUtils {
 	public static String md5(String message) { // message에 패스워드 들어있음
