@@ -39,7 +39,7 @@
 			<!-- 이름 -->
 			<div class="form-group">
 					<span class="text-secondary font-weight-bold">*이름</span>
-					<input type="text" id="name"class="form-control" 
+					<input type="text" id="name" class="form-control" 
 						name="name" placeholder="NAME">
 			</div>
 			<!-- 비밀번호 -->
@@ -49,9 +49,10 @@
 					<div id="isdifferntPassword" class="small d-none">비밀번호가 일치하지 않습니다.</div>
 					<div id="isSamePassword" class="small d-none">비밀번호가 일치합니다.</div>
 				</div>
-					<input type="password" in="password" class="form-control" 
+					<input type="password" id="password" class="form-control" 
 						name="password" placeholder="PASSWORD">
 			</div>
+			
 			<div class="form-group">
 					<span class="text-secondary font-weight-bold">*비밀번호</span>
 					<input type="password" id="confirmPassword" class="form-control" 
@@ -59,9 +60,9 @@
 			</div>
 			<!-- 이메일 -->
 			<div class="form-group mb-3">
-					<span class="text-secondary font-weight-bold">*이메일</span>
-					<input type="text" id="email" class="form-control" 
-						name="name" placeholder="EMAIL(higram@higram.com)">
+				<span class="text-secondary font-weight-bold">*이메일</span>
+				<input type="text" id="email" class="form-control" 
+					name="email" placeholder="EMAIL(higram@higram.com)">
 			</div>
 			
 			<div>
@@ -85,17 +86,19 @@ $(document).ready(function() {
 	$('#loginIdCheckBtn').on('click', function() {
 		// alert("중복");
 		let loginId = $('#loginId').val().trim();
+ 		
+		// 초기화
+		// 아이디
+	   	$('#idLoginIdLength').addClass('d-none');
+		$('#idCheckDuplicated').addClass('d-none');
+		$('#idIsDuplicate').addClass('d-none');
+		$('#idCheckOk').addClass('d-none');
 		
-			// 초기화
-	   	$('#idLoginIdLength').addClass('d-none')
-		$('#idCheckDuplicated').addClass('d-none')
-		$('#isSamePassword').addClass('d-none')
-		$('#isdifferntPassword').addClass('d-none')
-		$('#idIsDuplicate').addClass('d-none')
 	  
 		// 4글자 이상
 		if (loginId.length < 4) {
 			$('#idLoginIdLength').removeClass('d-none');
+			return;
 		} 
 		
 		// ajax
@@ -119,11 +122,11 @@ $(document).ready(function() {
 			}
 		});
 	});
-	
-	 $('#signUpForm').on('submit', function(){
+		// 회원가입버튼
+	 $('#signUpForm').on('submit', function(e){
 		e.preventDefault();
 		
-		// validation
+		 // validation
 		
 		let loginId = $('#loginId').val().trim();
 		if (loginId == '') {
@@ -144,20 +147,33 @@ $(document).ready(function() {
 			return false;
 		}
 		
+		// 비밀번호
+		$('#isdifferntPassword').addClass('d-none');
+		$('#isSamePassword').addClass('d-none');
+		
+		
 		// 비밀번호 다르면 텍스트값 초기화
 		if (password != confirmPassword) {
-			alert("비밀번호가 일치하지 않습니다.");
+			$('#isdifferntPassword').removeClass('d-none');
+		 	$('#password').val('');
+		 	$('#confirmPassword').val('');
+			return false;
+		} else if (password == confirmPassword) {
+			$('#isSamePassword').removeClass('d-none');
 			return false;
 		}
-		// TODO: 정규식 알아보기!!
 		
+		
+		// TODO: 정규식 알아보기!!
+	 	
 		let email = $('#email').val().trim();
+		alert(email);
 		if (email == '') {
 			alert("이메일을 입력하세요.");
 			return false;
 		}
 		
-		// TODO: 이메일 형식으로 입력하세요 만들기
+		/*// TODO: 이메일 형식으로 입력하세요 만들기
 		
 		// 아이디 중복확인 되었는지 확인
 		if($('#idCheckOk').hasClass('d-none')) { //true이면 중복확인이 안됨!!
@@ -180,8 +196,8 @@ $(document).ready(function() {
 				// 실패
 				alert("회원가입에 실패했습니다. 다시 시도해주세요" ); 
 			}
-		});
-	});
+		}); */
+	}); 
  
 });
 </script>

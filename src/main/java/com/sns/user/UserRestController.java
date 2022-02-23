@@ -56,6 +56,7 @@ public class UserRestController {
 		
 		if (row < 1) {
 			result.put("result","error");
+			result.put("errorMessage", "회원가입에 실패 했습니다.");
 		}
 		
 		return  result;

@@ -16,24 +16,23 @@
  	<insert id="insertUser" parameterType="map">
  		INSERT INTO `user`
  			(
- 			`loginId`
- 			,`password`
- 			,`name`
- 			,`email`
- 			,`profileImageUrl`
- 			,`createdAt`
- 			,`updatedAt`
+	 			`loginId`
+	 			,`password`
+	 			,`name`
+	 			,`email`
+	 			,`profileImageUrl`
+	 			,`createdAt`
+	 			,`updatedAt`
  			)
  		VALUES
  			(
- 			#{loginId}
- 			,#{password}
- 			,#{name}
- 			,#{email}
- 			,#{profileImageUrl}
- 			,NOW()
- 			,NOW()
- 			
+	 			#{loginId}
+	 			,#{password}
+	 			,#{name}
+	 			,#{email}
+	 			,#{profileImageUrl}
+	 			,NOW()
+	 			,NOW()
  			)
  	
  	</insert>

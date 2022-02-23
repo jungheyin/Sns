@@ -1,0 +1,25 @@
+@charset "UTF-8";
+
+#wrap {
+	width:700px;
+}
+header {
+	height: 100px;
+}
+
+.contents {
+	height: 1000Px;
+}
+
+.contents .feedHeader {
+	height: 60px
+}
+.contents .feedBox {
+	width: 600px;
+	height: 1000px;
+}
+
+.contents .feedImage {
+
+	height: 600px;
+}
