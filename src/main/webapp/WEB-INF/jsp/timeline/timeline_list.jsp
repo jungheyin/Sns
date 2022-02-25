@@ -50,9 +50,37 @@
 					</div>
 				
 				</section>
+				<!-- 댓글 쓰기 -->
+				<!-- 로그인 된 상태에서만 쓸 수 잇다. -->
+				<c:if test="${not empty userId}">
+					<div class="comment-write d-feld border-top mt-2">
+						<input type="text" id="commentText${post.id}" class="form-control" >
+						<button type="button" class="commentBtn btn btn-info"></button>
+							
+					</div>
+					<!-- 1.id를 만들어서
+						2. value값을 가져와서 -->
 			</section>			
 		</body>
 		
 	</div>
 </body>
 </html>
+
+<script>
+$(document).ready(function() {
+	
+
+
+	// 댓글 쓰기 - 게시 버튼 클릭
+	$('.commentBtn').on('click', function(e) {
+		let postId = $(this).data('post-id'); // data-post-id => 하이픈으로 사용해야한다.
+		// alert(postId);
+		
+		// input 태그 : 
+		let commentContent = $('#commentText' + postId).val().trim();
+		// alert(commentContent);
+		
+	});
+});
+</script>
