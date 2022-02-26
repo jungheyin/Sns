@@ -1,0 +1,33 @@
+@charset "UTF-8";
+
+
+#wrap {width:1200px; margin:auto;}
+#signUpWrap {
+	width: 500px;
+}
+header {height: 150px;}
+a {text-decoration:none !important; }
+a:hover {text-decoration:none !important;}
+.contents {
+	min-height: 500px
+}
+
+footer {height: 200px;}
+.loginBtn {background-color: #3F5DAF;}
+.loginBtn:hover {background-color: #3A7DB3;}
+.signUpBtn {background-color: #DEDEDE;}
+.signUpBtn:hover {background-color: #CCCCCC;}
+
+/*  회원가입 */
+
+#signUpBtn {background-color: #3F5DAF;}
+#signUpBtn:hover {background-color: #3A7DB3;}
+
+/* 회원가입-문구 */
+#idCheckOk {color:#3F5DAF;}
+#isSamePassword{color:#3F5DAF;}
+#emailOk{color:#3F5DAF;}
+
+
+
+

@@ -58,6 +58,7 @@
 						<button type="button" class="commentBtn btn btn-info"></button>
 							
 					</div>
+				</c:if>
 					<!-- 1.id를 만들어서
 						2. value값을 가져와서 -->
 			</section>			
