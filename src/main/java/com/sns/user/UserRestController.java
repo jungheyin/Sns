@@ -81,6 +81,7 @@ public class UserRestController {
 			HttpSession session = request.getSession();
 			session.setAttribute("userLoginId", user.getLoginId());
 			session.setAttribute("userPassword", user.getPassword());
+			session.setAttribute("userName", user.getName());
 		} else {
 			result.put("result", "error");
 			result.put("errorMessage", "존재하지 않은 사용자입니다.");
