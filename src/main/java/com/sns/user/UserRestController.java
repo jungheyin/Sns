@@ -32,7 +32,6 @@ public class UserRestController {
 		boolean existLoginId = userBO.existLoginId(loginId);
 		
 		result.put("result", existLoginId);
-		
 		return result;
 	}
 	
