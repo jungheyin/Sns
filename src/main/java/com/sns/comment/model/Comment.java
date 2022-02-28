@@ -1,4 +1,4 @@
-package com.sns.timeline.model;
+package com.sns.comment.model; // comment는 db용와 view용을 따로 만드는것이 더 좋을꺼같다!
 
 import java.util.Date;
 

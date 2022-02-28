@@ -20,7 +20,6 @@
 	 			,`password`
 	 			,`name`
 	 			,`email`
-	 			,`profileImageUrl`
 	 			,`createdAt`
 	 			,`updatedAt`
  			)
@@ -30,7 +29,6 @@
 	 			,#{password}
 	 			,#{name}
 	 			,#{email}
-	 			,#{profileImageUrl}
 	 			,NOW()
 	 			,NOW()
  			)
@@ -53,5 +51,20 @@
  			AND `password` = #{password}
  	</select>
  
+ 	<select id="selectUserById" resultType="com.sns.user.model.User">
+ 		SELECT
+ 			`id`
+			,`loginId`
+			,`password`
+			,`name`
+			,`email`
+			,`profileImageUrl`
+			,`createdAt`
+			,`updatedAt`
+ 		FROM
+ 		 	`user`
+ 		WHERE
+ 			`id` = #{id}
+ 	</select>
  
  </mapper>

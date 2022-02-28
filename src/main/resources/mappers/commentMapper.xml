@@ -2,8 +2,27 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
- <mapper namespace="com.sns.timeline.dao.CommentDAO">
- 	<select id="selectCommentList" resultType="com.sns.timeline.model.Comment">
+ <mapper namespace="com.sns.comment.dao.CommentDAO">
+ 	<insert id="insertComment" parameterType="map"> 
+ 		INSERT INTO `comment`
+ 		(
+ 			`userId`
+ 			,`postId`
+ 			,`content`
+ 			,`createdAt`
+ 			,`updatedAt`
+ 		)
+ 		VALUS
+ 		(
+	 		 #{userId}
+	 		 ,#{postId}
+	 		 ,#{content}
+	 		 ,NOW()
+	 		 ,NOW()
+ 		)
+ 	</insert>
+ 	
+ 	<select id="selectCommentListByPostId" resultType="com.sns.comment.model.Comment">
  		SELECT
  			`id`
  			,`userId`
@@ -13,6 +32,7 @@
  			,`updatedAt`
  		FROM
  			`comment`
+ 		WHERE
+ 			`postId` = #{postId}
  	</select>
- 
  </mapper>

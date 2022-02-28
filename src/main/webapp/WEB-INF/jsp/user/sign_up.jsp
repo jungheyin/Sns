@@ -77,12 +77,12 @@
 				
 			</div>
 			<div>
-				<input type="text" id="emailAddress" class="form-control mb-4" 
-					name="emailAddress" placeholder="higram@higram.com" >
+				<input type="text" id="email" class="form-control mb-4" 
+					name="email" placeholder="higram@higram.com" >
 			</div>		
 		<!-- 회원가입 버튼 -->			
 		<div>
-			<input type="submit" id="signUpBtn" 
+			<input type="button" id="signUpBtn" 
 				class="btn btn-block fornt-weight-bold text-white"
 				value="회원가입">
 		</div>		
@@ -141,7 +141,7 @@ $(document).ready(function(e) {
 		return regExp.test(password);
 	}	
 	// 회원가입 버튼
-	$('#signUpForm').on('submit', function(e) {
+	$('#signUpBtn').on('click', function(e) {
 		//e.preventDefault();
 		// alert("회원가입");
 		
@@ -188,46 +188,40 @@ $(document).ready(function(e) {
 			return false;
 		} else if (password == confirmPassword) {
 			$('#isSamePassword').removeClass('d-none');
-			return false;
-		} else {
-			console.log("실패");
-			return false;
-		}
+		} 
 		
-		alert("ddd");
 		// 이메일
-		var emailAddress = $('#emailAddress').val().trim();
+		let email = $('#email').val().trim();
 		
 		$('#notEmail').addClass('d-none');
 		$('#emailOk').addClass('d-none');
 		
-		 if (emailAddress == '') {
+		 if (email == '') {
 			 alert("이메일은 입력해 주세요.");
 			 return false;
-		 }  else {
-			 if (!emailCheck(emailAddress)) {
-				 $('#notEmail').removeClass('d-none');
-				 return false;
-			 } else {
-				 $('#emailOk').removeClass('d-none');
-				 return false;
-			 }
-		 } 
+		 }  else if (!emailCheck(email)) {
+			 $('#notEmail').removeClass('d-none');
+			 return false;
+		 } else if (emailCheck(email)) {
+			 $('#emailOk').removeClass('d-none');
+			
+		 }
+		 
 		 
 		// ajax 호출
-		let url = $(this).attr('action');
-		let params = $(this).serialize();
+		let url = $('#signUpForm').attr('action');
+		let params = $('#signUpForm').serialize();
 		
 		$.post(url, params)
 		.done(function(data) {
 			if (data.result == 'success') {
 				// 성공
-				alert("회원가입에 성공 했습니다." + ${userName} + "님♡");
+				alert("회원가입에 성공 했습니다.");
 				location.href = "/user/sign_in_view";
 			} else {
 				alert("회원가입에 실패 했습니다.");
 			}
 		});
-	});//버튼 끝
+	});
 });
 </script>

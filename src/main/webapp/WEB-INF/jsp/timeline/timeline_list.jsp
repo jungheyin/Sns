@@ -41,12 +41,13 @@
 				<section class="d-flex justify-content-center">
 					<div class="feedBox">
 					<!-- 상단 -->
+				<%-- 	<c:forEach items="${contentList}"  var="conetnt"> --%>
 						<div class="feedHeader d-flex justify-content-between align-items-center">
 							<!-- 프로필 : 누르면 마이페이지로 이동한다. -->
 							<a href="#">
 								<div class="userProfileId d-flex ml-2">
 									<label class="mr-2"><img src="/staticImages/catProfileIcon.png" alt="프로필 사진" width="40px" height="40px"></label>
-									<h4 class="m-1 text-dark">hi1856</h4><!-- ${userLoginId} -->
+									<h4 class="m-1 text-dark"><%-- ${content.user.name} --%></h4><!-- ${userLoginId} -->
 								</div>
 							</a>
 							<!-- 더보기 -->
@@ -57,7 +58,7 @@
 						
 						<!-- 사진 -->
 						<div class="feedImage bg-primary">
-						<img src="#" alt="피드사진" width="600px">
+						<img src="<%-- ${content.post.imagePath} --%>" alt="피드사진" width="600px">
 						</div>
 						
 						<!-- 좋아요 -->
@@ -84,27 +85,29 @@
 						<!-- 글쓴이, 내용 -->
 						<div class="ml-2 mt-2">
 							<div>
-								<h5 id="userLoginId" class="m-1">hi1856</h5><!-- ${userLoginId} -->
+								<h5 id="userLoginId" class="m-1"></h5><!-- ${content.user.name} -->
 							</div>
 							<div  class="ml-3">
 								<span>
-									안녕하세요. 정혜인입니다. <br>
-									Higram만들어 봅시다. <br>
-									화이팅!!
+						<%-- 		${content.post.content} --%>
 								</span>
 							</div>
 						</div>
-						
-				<!-- 댓글 쓰기 -->
+		
+					<!-- 댓글 부분 -->
+			<%-- 		<c:if test="${not empty content.commentList}">
+					<c:forEach items="${content.commentList}" var="commentView"> --%>
+					<!-- 댓글 쓰기 -->
 				<div class="form-group">
 					<div class="ml-5 mt-2 d-flex border-left">
-						<h5 class="mx-3">hi1856</h5>
+						<h5 class="mx-3"></h5>
 						<span>오? 좋은데!!</span>
 					</div>		
-				</div>		
-						
+				</div>
+			<!-- 	</c:forEach>		
+				</c:if> -->
 				<!-- 로그인 된 상태에서만 쓸 수 잇다. -->
-				<c:if test="${not empty userId}">
+				<%-- <c:if test="${not empty userId}"> --%>
 					<div class="comment_write  mt-2 d-flex ml-2">
 						<div class="mr-3">
 							<img src="/staticImages/catProfileIcon.png" alt="사용자" id="profile"
@@ -118,10 +121,11 @@
 								class="mt-1 " width="35px" height="35px">
 						</div>
 					</div>
-				</c:if>
+			<!-- 	</c:if> -->
 					<!-- 1.id를 만들어서
 						2. value값을 가져와서 -->
 					</div>
+			<!-- 	</c:forEach> -->
 			</section>
 		</section>				
 		</body>
@@ -129,7 +133,8 @@
 	</div>
 </body>
 </html>
-
+<!-- siblings: 형제를 찾는 함수 
+let commentContent = $(this).siblings('input'.val().trim();-->
 <script>
 $(document).ready(function() {
 	

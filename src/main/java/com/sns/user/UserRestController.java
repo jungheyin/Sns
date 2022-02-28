@@ -70,7 +70,7 @@ public class UserRestController {
 		
 		// 비밀번호 암호화
 		String encryptPassword = EncryptUtils.md5(password);
-		// db 연결
+		// db 연결 사용자가 있는지 확인
 		User user = userBO.getByLoginIdPassword(loginId, encryptPassword);
 		// 결과 json 리턴!
 		Map<String, Object> result = new HashMap<>();
@@ -80,7 +80,7 @@ public class UserRestController {
 		if (user != null) { // 로그인 성공
 			HttpSession session = request.getSession();
 			session.setAttribute("userLoginId", user.getLoginId());
-			session.setAttribute("userPassword", user.getPassword());
+			session.setAttribute("userId", user.getId());
 			session.setAttribute("userName", user.getName());
 		} else {
 			result.put("result", "error");
