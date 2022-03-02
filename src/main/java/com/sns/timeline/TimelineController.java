@@ -23,7 +23,8 @@ public class TimelineController {
 
 	
 	@RequestMapping("/timeline_list_view")
-	public String timelineListView(Model model,
+	public String timelineListView(
+			Model model,
 			HttpServletRequest request) {
 		
 		HttpSession session = request.getSession();
