@@ -33,7 +33,7 @@
 				</div>
 			</div>
 		</header>
-
+		<!-- 글쓰기 부분 -->
 		<section class="contents">
 				<div class="d-flex justify-content-end mr-5 mt-2">
 					<input type="file" id="photoFile" class="d-none" accept=".gif, .jpg, .jpeg, .png">
