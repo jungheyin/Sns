@@ -228,6 +228,9 @@ $(document).ready(function() {
 		// 3.꺼내서 사용가능!
 		let postId = $('#moreModal').data('post-id');
 		alert(postId);
+		
+		// TODO: 아작스를 통해 삭제기능 추가
+		// 글의대한 삭제이므로 도메인은 글이다.=>POST쪽에서 삭제한다.
 	});
 });
 

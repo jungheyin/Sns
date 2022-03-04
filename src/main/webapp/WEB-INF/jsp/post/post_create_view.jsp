@@ -36,14 +36,14 @@
 		<!-- 글쓰기 부분 -->
 		<section class="contents">
 				<div class="d-flex justify-content-end mr-5 mt-2">
-					<input type="file" id="photoFile" class="d-none" accept=".gif, .jpg, .jpeg, .png">
+					<input type="file" id="file" class="d-none" accept=".gif, .jpg, .jpeg, .png">
 					<a href="#" id="photoImg"><img src="/staticImages/photo.png" alt="이미지" width="30px" height="30px"></a>
 				</div>
 			<section>
 				<!-- 사진 -->
 				<div class="d-flex justify-content-center mt-2">
 					<div class="photoBox bg-info d-none">
-						
+						<!-- TODO: 사진 선택시 사진이 나타낸다. -->
 					</div>
 				</div>
 				<!-- 내용 -->
@@ -64,9 +64,21 @@ $(document).ready(function() {
 	
 	// 사진선택하기
 	$('#photoImg').on('click', function() {
-		$('#photoFile').click();
+		$('#file').click();
 		
-		let photo = $('input[]')
+	});
+	
+	function handIeImgFileSelect(e) {
+		let files = e.target.files;
+		let filesArr = Array.prototype.slice.call(files);
+		
+		filesArr.forEach(function(f) {
+			// https://greatps1215.tistory.com/4
+			
+		});
+	}
+	// 사진 업로드 했을 때, 사진파일이 보인다.
+	$('#file').on('change', function() {
 		
 	});
 });
