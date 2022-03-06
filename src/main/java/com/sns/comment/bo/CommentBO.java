@@ -34,7 +34,6 @@ public class CommentBO {
 	// contentView에서 List<CommentView> 를 바로 사용할수 있게 가공한다.
 		
 		List<CommentView> resultList = new ArrayList<>(); // 결과
-		
 		List<Comment> commentList = getCommentListByPostId(postId);
 		
 		for (Comment comment : commentList) { // Comment -> CommentView

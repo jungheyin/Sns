@@ -15,36 +15,38 @@
 </head>
 <body>
 	<div id="wrap" class="container">
-		<header class="bg-warning">
+		<header class="my-2">
 			<div class="d-flex justify-content-between">
 				<div class="mt-2 ml-2">
 					<a href="/timeline/timeline_list_view">
 						<img src="/staticImages/left.png" alt="뒤로가기" width="30px" height="30px">
 					</a>
 				</div>
-				<div class="d-flex mt-2">
-					<img src="/staticImages/catProfileIcon.png" alt="프로필 사진" width="30px" height="30px">
-					<h5 class="ml-2 mt-1">hi1856</h5> <!-- ${userLoginId} -->
-				</div>
+				<a href="/post/post_create_view"class="d-flex mt-2">
+					<img src="${contentView.user.profileImageUrl}" alt="프로필 사진" width="30px" height="30px">
+					<h4 class="ml-2 mt-1 text-dark">${contentView.user.loginId}hi1856</h4> <!-- ${userLoginId} -->
+				</a>
 				<div class="mt-2 mr-2">
 					<button id="saveBtn" class="btn d-none">저장</button>
-						<img src="/staticImages/right.png" alt="앞으로가기" width="30px" height="30px">
+						<img src="/staticImages/right.png" id="svaeImg" alt="앞으로가기" width="30px" height="30px">
 					</a>
 				</div>
 			</div>
 		</header>
 		<!-- 글쓰기 부분 -->
 		<section class="contents">
-				<div class="d-flex justify-content-end mr-5 mt-2">
-					<input type="file" id="file" class="d-none" accept=".gif, .jpg, .jpeg, .png">
-					<a href="#" id="photoImg"><img src="/staticImages/photo.png" alt="이미지" width="30px" height="30px"></a>
-				</div>
+			<!-- 이미지파일 input부분 -->
+			<div class="preview d-flex justify-content-end mr-5 mt-2">
+				<input type="file" id="file" 
+					class="d-none" accept=".gif, .jpg, .jpeg, .png">
+				<a href="#" id="photoImg">
+					<img src="/staticImages/photo.png" alt="이미지" width="30px" height="30px">
+				</a>
+			</div>
 			<section>
-				<!-- 사진 -->
-				<div class="d-flex justify-content-center mt-2">
-					<div class="photoBox bg-info d-none">
-						<!-- TODO: 사진 선택시 사진이 나타낸다. -->
-					</div>
+			<!-- 사진 -->
+				<div class="d-flex justify-content-center mt-2" >
+					<img src="" width="500px"  id="image">
 				</div>
 				<!-- 내용 -->
 				<div class="d-flex justify-content-center mt-1">
@@ -53,7 +55,6 @@
 			</section>
 				
 		</section>
-		<footer></footer>
 	</div>
 </body>
 </html>
@@ -65,20 +66,61 @@ $(document).ready(function() {
 	// 사진선택하기
 	$('#photoImg').on('click', function() {
 		$('#file').click();
-		
 	});
 	
-	function handIeImgFileSelect(e) {
-		let files = e.target.files;
-		let filesArr = Array.prototype.slice.call(files);
+	$("#file").on("change", function(e) {
+		let tmp = e.target.files[0];
+		let img = URL.createObjectURL(tmp);
+	  $("#image").attr("src", img);
+	});
+	
+	$('#svaeImg').on('click', function() {
+		$('#saveBtn').click();
 		
-		filesArr.forEach(function(f) {
-			// https://greatps1215.tistory.com/4
+		// 이미지 파일
+		let file = $('#file').val();
+		console.log(file);
+		
+		if (file != '') {
+			let ext = file.split('.').pop().toLowerCase();
+			if ($.inArray(ext, ['gif', 'png', 'jpg', 'jpeg'])== -1) {
+				alert("gif, png, jpg, jpeg파일만 업로드 할 수 있습니다.");
+				// 파일 비우기
+				$('#file').val();
+				return;
+			}
+		}
 			
+		// 내용 부분
+		let content = $('#content').val();
+		if (content == '') {
+			alert("내용을 입력해 주세요.");
+			return;
+		}
+		
+		let formData = new FormData();
+		formData.append("content", content);
+		formData.append("file", $('#file')[0].files[0]);
+		
+		// ajax
+		$.ajax({
+			type: "POST"
+			, url: "/post/create"
+			, data: formData
+			, enctype: "multipart/form-data"
+			, processData: false
+			, contentType: false
+			, success: function(data) {
+				if (result.data == "success") {
+					location.href="/timeline/timeline_list_view"
+				} else {
+					alert(data.errorMessage);
+				}
+			}
+			, error: function(e) {
+				alert("글쓰기에 실패했습니다.");
+			}
 		});
-	}
-	// 사진 업로드 했을 때, 사진파일이 보인다.
-	$('#file').on('change', function() {
 		
 	});
 });

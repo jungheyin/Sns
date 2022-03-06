@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,7 +22,7 @@ import com.sns.post.model.Post;
 @RestController
 public class PostRestController {
 	
-	private Logger logger = LoggerFactory.getLogger(this.Class());
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired
 	public PostBO postBO;
@@ -35,10 +36,24 @@ public class PostRestController {
 	}
 	
 	// TODO: POST를 추가하는 로직 필요!!
-	
-	private String Class() {
-		// TODO Auto-generated method stub
-		return null;
+	@PostMapping("/create")
+	public Map<String, Object> create(
+			@RequestParam(value="images", required=false) String images,
+			@RequestParam("content") String content,
+			HttpServletRequest request) {
+		
+		Map<String, Object> result = new HashMap<>();
+		HttpSession session = request.getSession();
+		Integer userId = (Integer) session.getAttribute("userId");
+		// 권한검사
+		if (userId == null) {
+			result.put("result", "error");
+			result.put("errorMessage", "로그인을 다시해주세요");
+			return result;
+		}
+		// insert postBO
+		result.put("result", "success");
+		return result;
 	}
 
 	@DeleteMapping("/delete")

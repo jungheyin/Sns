@@ -18,6 +18,10 @@ public class PostBO {
 		return postDAO.selectPostList();
 	}
 	
+	public void createPost(int userId, String images, String content) {
+		postDAO.insertPost(userId, images, content);		
+	}
+	
 	public void deletePostByPostIdAndUserId(int postId, int userId) {
 		
 		// 1. postId로 select Post => logger로 남기는기!!
