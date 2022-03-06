@@ -15,6 +15,7 @@
 </head>
 <body>
 	<div id="wrap" class="container">
+		<!-- 헤더부분 -->
 		<header>
 			<div class="d-flex align-items-end justify-content-between">
 				<div class="mt-5">
@@ -36,18 +37,21 @@
 			</div>
 			<hr>
 		</header>
+		<!-- 바디부분 -->
 		<body>
 			<section class="contents mt-4">
+			
+			<!-- 타임 라인 부분!! -->
+				<c:forEach items="${contentList}" var="content">
 				<section class="d-flex justify-content-center">
 					<div class="feedBox">
-					<!-- 상단 -->
-				<%-- 	<c:forEach items="${contentList}"  var="conetnt"> --%>
+					<!-- 상단: 프로필, ...더보기 버튼 (삭제,수정) -->
 						<div class="feedHeader d-flex justify-content-between align-items-center">
 							<!-- 프로필 : 누르면 마이페이지로 이동한다. -->
 							<a href="#">
 								<div class="userProfileId d-flex ml-2">
 									<label class="mr-2"><img src="/staticImages/catProfileIcon.png" alt="프로필 사진" width="40px" height="40px"></label>
-									<h4 class="m-1 text-dark"><%-- ${content.user.name} --%></h4><!-- ${userLoginId} -->
+									<h4 class="m-1 text-dark"></h4>
 								</div>
 							</a>
 							<!-- 더보기 -->
@@ -58,74 +62,77 @@
 						
 						<!-- 사진 -->
 						<div class="feedImage bg-primary">
-						<img src="<%-- ${content.post.imagePath} --%>" alt="피드사진" width="600px">
+							<img src="${content.post.imagePath} " alt="피드사진" width="600px">
 						</div>
 						
 						<!-- 좋아요 -->
-						<div class="d-flex mt-2">
+						<div class="feedLike d-flex mt-2">
 							<!-- 하트 -->
 							<div class="ml-2 mr-2">
-								<div>
-									<input type="button" id="heartBtn" class="btn btn d-none" value="하트">
-								</div>
-								<div>
-									<img src="/staticImages/basicHeart.png" id="basicHeartImg" class=" "
-										width="35px" height="35px" alt="하트" >
-								</div>
-								<div>
-									<img src="/staticImages/pinkHeart.png" id="basicHeartImg" class="d-none"
-										width="35px" height="35px" alt="핑크하트">
-								</div>
+								<a href="#" class="likeBtn">
+									<!-- 종아요 해제 상태 -->
+									<div>
+										<img src="/staticImages/basicHeart.png" id="basicHeartImg" class=" "
+											width="35px" height="35px" alt="하트" >
+									</div>
+									<!-- 좋아요 상태 -->
+									<div>
+										<img src="/staticImages/pinkHeart.png" id="basicHeartImg" class="d-none"
+											width="35px" height="35px" alt="핑크하트">
+									</div>
+								</a>
 							</div>
-							<!-- 좋아요 -->
 							<div class="mt-2">
 							 	<span class="font-weight-bold">좋아요 2개</span>
 							</div>
 						</div>
+						
 						<!-- 글쓴이, 내용 -->
-						<div class="ml-2 mt-2">
-							<div>
-								<h5 id="userLoginId" class="m-1"></h5><!-- ${content.user.name} -->
+						<div class="feedPost ml-2 mt-2">
+							<!-- 글쓴이 -->
+							<span class="m-1 font-weight-bold">${content.user.name}</span>
+							<span>
+								${content.post.centent}
+							</span>
+						</div>
+					
+						<!-- 댓글 부분 -->
+						
+						<!-- 댓 목록: 댓글이 있는 경우에만 댓글 영역 노출 -->
+						<c:if test="${not empty content.commentList}">
+						<c:forEach items="${content.commentList}" var="commentView" >
+							<!-- 댓글 목록 -->
+								<div class="ml-5 mt-2 border-left">
+									<span class="mx-3">${commentView.user.name}</span>
+									<span class="mx-3">${commentView.comment.content}</span>
+									
+									<!-- 댓글쓴이가 본인이면 삭제버튼 노출 -->
+									<a href="#" class="commentDeleteBtn" data-comment-id="${comment.id}">
+										<img src="/staticImages/ .png" alt="" width="30px" height="30px">
+									</a>
+								</div>		
+						</c:forEach>
+						</c:if>
+						<!-- 댓글 쓰기 -->
+						<!-- 로그인 된 상태에서만 쓸 수 잇다. -->
+						<c:if test="${not empty userId}"></c:if>
+							<!-- 사용자 프로필 사진 -->
+							<div class="comment_write  mt-2 d-flex ml-2">
+								<div class="mr-3">
+									<img src="/staticImages/catProfileIcon.png" alt="사용자" id="profile"
+										width="40px" height="40px">
+								</div>
+								<!-- 댓글 쓰기 -->
+								<input type="text" id="commentText${post.id}" 
+									class="form-control col-10 " placeholder="댓글달기..." >
+								<!-- 댓글 버튼 -->
+								<div class="ml-3">
+									<button type="button" class="commentBtn btn btn-info d-none"></button>
+									<img src="/staticImages/send.png" id="sendImg" alt="댓글달기"
+										class="mt-1 " width="35px" height="35px">
+								</div>
 							</div>
-							<div  class="ml-3">
-								<span>
-						<%-- 		${content.post.content} --%>
-								</span>
-							</div>
-						</div>
-		
-					<!-- 댓글 부분 -->
-			<%-- 		<c:if test="${not empty content.commentList}">
-					<c:forEach items="${content.commentList}" var="commentView"> --%>
-					<!-- 댓글 쓰기 -->
-				<div class="form-group">
-					<div class="ml-5 mt-2 d-flex border-left">
-						<h5 class="mx-3"></h5>
-						<span>오? 좋은데!!</span>
-					</div>		
-				</div>
-			<!-- 	</c:forEach>		
-				</c:if> -->
-				<!-- 로그인 된 상태에서만 쓸 수 잇다. -->
-				<%-- <c:if test="${not empty userId}"> --%>
-					<div class="comment_write  mt-2 d-flex ml-2">
-						<div class="mr-3">
-							<img src="/staticImages/catProfileIcon.png" alt="사용자" id="profile"
-								width="40px" height="40px">
-						</div>
-							<input type="text" id="commentText${post.id}" 
-								class="form-control col-10 " placeholder="댓글달기..." >
-						<div class="ml-3">
-							<button type="button" class="commentBtn btn btn-info d-none"></button>
-							<img src="/staticImages/send.png" id="sendImg" alt="댓글달기"
-								class="mt-1 " width="35px" height="35px">
-						</div>
 					</div>
-			<!-- 	</c:if> -->
-					<!-- 1.id를 만들어서
-						2. value값을 가져와서 -->
-					</div>
-			<!-- 	</c:forEach> -->
 			</section>
 		</section>				
 		</body>
@@ -159,12 +166,13 @@ $(document).ready(function() {
 	$('#sendImg').on('click', function(e) {
 		$('.commentBtn').click();
 		
-		let postId = $(this).data('post-id'); // data-post-id => 하이픈으로 사용해야한다.
+		let postId = $('.commentBtn').data('post-id'); // data-post-id => 하이픈으로 사용해야한다.
 		// alert(postId);
 		
 		// input 태그 : 
 		let commentContent = $('#commentText' + postId).val().trim();
 		// alert(commentContent);
+		
 		
 	});
 });
