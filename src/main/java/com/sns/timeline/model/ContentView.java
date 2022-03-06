@@ -14,7 +14,12 @@ public class ContentView {
 	private Post post;
 	private User user; // 유저의 정보도 가져와도 괜찮을꺼 같다!! // 글쓴이
 	private List<CommentView> commentList;
-//	private List<Like> likeList;
+	private int likeCount; // 좋아요의 개수
+	private boolean filledLike; // 내가 좋아요를 눌렀는지의 여부
+
+//	private List<Like> likeList; - 누가 좋아요를 눌렀는지 의 리스트를 가져올시 사용한다.
+	
+	
 	
 	public List<CommentView> getCommentList() {
 		return commentList;
@@ -38,6 +43,22 @@ public class ContentView {
 
 	public void setPost(Post post) {
 		this.post = post;
+	}
+
+	public int getLikeCount() {
+		return likeCount;
+	}
+
+	public void setLikeCount(int likeCount) {
+		this.likeCount = likeCount;
+	}
+
+	public boolean isFilledLike() { // boolean은 getter 생성시  is로 만들어 진다.!
+		return filledLike;
+	}
+
+	public void setFilledLike(boolean filledLike) {
+		this.filledLike = filledLike;
 	}
 	
 	
