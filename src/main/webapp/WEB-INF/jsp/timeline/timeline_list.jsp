@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,8 +35,8 @@
 				</div>
 				<div class="d-flex">
 					<div class="mr-3">
-						<a href="/post/post_create_view"> <img
-							src="/staticImages/plus.png" width="30px" height="30px"
+						<a href="/post/post_create_view"> 
+							<img src="/staticImages/plus.png" width="30px" height="30px"
 							id="plusImg" alt="메뉴">
 						</a>
 					</div>
@@ -49,9 +50,9 @@
 			<hr>
 		</header>
 			<!-- 타임라인 영역 -->
-			<section class="contents mt-4 d-flex justify-content-center">
+			<c:forEach items="${contentList}" var="content">
+			<section class="contents mt-4 d-flex justify-content-center border">
 			<!-- 글쓴이 프로필사진, 글쓴이 아이디  + ... 더보기-->
-				<c:forEach items="${contentList}" var="content">
 				<div class="feedBox">
 				<!-- 상단: 프로필, ...더보기 버튼 (삭제,수정) -->
 					<div class="feedHeader d-flex justify-content-between align-items-center">
@@ -75,9 +76,12 @@
 					</div>
 
 					<!-- 이미지-->
-					<div class="feedImage bg-primary">
-						<img src="${content.post.imagePath} " alt="피드사진" width="600px">
+					<c:if test="${not empty content.post.images}"> 
+					<div class="feedImage">
+						<!-- 이미지가 존재하는 경우에만 노출 -->
+							<img src="${content.post.images}" alt="피드사진" width="600px">
 					</div>
+					</c:if>
 
 					<!-- 좋아요 -->
 					<div class="feedLike d-flex mt-2">
@@ -101,7 +105,7 @@
 						<!-- 글쓴이 -->
 						<span class="m-1 font-weight-bold">${content.user.name} hi1856</span>
 						<!-- 글내용 --> 
-						<span>${content.post.centent}메롱 </span>
+						<span>${content.post.content}메롱 </span>
 					</div>
 					<!-- 댓글목록 -->
 					<!-- 댓글: 댓글이 있는 경우에만 댓글 영역 노출-->
@@ -143,8 +147,8 @@
 							</div>
 						</div>
 					</c:if>
-			</c:forEach>
 			</section>
+			</c:forEach>
 		</body>
 </html>
 <!-- siblings: 형제를 찾는 함수 

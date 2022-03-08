@@ -6,7 +6,7 @@
 	<select id="selectPostList" resultType="com.sns.post.model.Post">
 		SELECT
 			`id`
-			,`uerId`
+			,`userId`
 			,`images`
 			,`content`
 			,`createdAt`

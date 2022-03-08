@@ -86,7 +86,7 @@ $(document).ready(function() {
 			if ($.inArray(ext, ['gif', 'png', 'jpg', 'jpeg'])== -1) {
 				alert("gif, png, jpg, jpeg파일만 업로드 할 수 있습니다.");
 				// 파일 비우기
-				$('#file').val();
+				$('#file').val('');
 				return;
 			}
 		}

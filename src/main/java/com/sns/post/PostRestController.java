@@ -52,6 +52,7 @@ public class PostRestController {
 			return result;
 		}
 		// insert postBO
+		
 		result.put("result", "success");
 		return result;
 	}
