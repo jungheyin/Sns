@@ -15,10 +15,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.sns.post.bo.PostBO;
 import com.sns.post.model.Post;
 
+@RequestMapping("/post")
 @RestController
 public class PostRestController {
 	
@@ -38,7 +40,7 @@ public class PostRestController {
 	// TODO: POST를 추가하는 로직 필요!!
 	@PostMapping("/create")
 	public Map<String, Object> create(
-			@RequestParam(value="images", required=false) String images,
+			@RequestParam(value="images", required=false) MultipartFile images,
 			@RequestParam("content") String content,
 			HttpServletRequest request) {
 		
@@ -48,14 +50,24 @@ public class PostRestController {
 		// 권한검사
 		if (userId == null) {
 			result.put("result", "error");
-			result.put("errorMessage", "로그인을 다시해주세요");
+			logger.error("[글쓰기] 로그인 세션이 없습니다.");
 			return result;
 		}
 		// insert postBO
+		int row = postBO.createPost(userId, images, content);
+		if (row > 0) {
+			result.put("result", "success");
+			
+		} else {
+			result.put("result", "error");
+			logger.error("[글쓰기] 글쓰기를 실패 했습니다.");
+			
+		}
 		
-		result.put("result", "success");
+		
 		return result;
 	}
+	
 
 	@DeleteMapping("/delete")
 	public Map<String, Object> delete(

@@ -103,9 +103,9 @@
 					<!-- 글쓴이, 내용 -->
 					<div class="feedPost ml-2 mt-2">
 						<!-- 글쓴이 -->
-						<span class="m-1 font-weight-bold">${content.user.name} hi1856</span>
+						<span class="m-1 font-weight-bold">${content.user.name}ddd</span>
 						<!-- 글내용 --> 
-						<span>${content.post.content}메롱 </span>
+						<span>${content.post.content}</span>
 					</div>
 					<!-- 댓글목록 -->
 					<!-- 댓글: 댓글이 있는 경우에만 댓글 영역 노출-->
@@ -198,7 +198,6 @@ let commentContent = $(this).siblings('input'.val().trim();-->
 
 			let postId = $('.commentBtn').data('post-id'); // data-post-id => 하이픈으로 사용해야한다.
 			// 글의 번호
-			let postId = $(this).data('post-id'); // data-post-id => 하이픈으로 사용해야한다.
 
 			// input 태그 : 
 			let commentContent = $('#commentText' + postId).val().trim();

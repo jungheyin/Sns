@@ -68,6 +68,7 @@ $(document).ready(function() {
 		$('#file').click();
 	});
 	
+	// 파일선택시 미리보기
 	$("#file").on("change", function(e) {
 		let tmp = e.target.files[0];
 		let img = URL.createObjectURL(tmp);
@@ -111,7 +112,7 @@ $(document).ready(function() {
 			, processData: false
 			, contentType: false
 			, success: function(data) {
-				if (result.data == "success") {
+				if (data.result == "success") {
 					location.href="/timeline/timeline_list_view"
 				} else {
 					alert(data.errorMessage);
