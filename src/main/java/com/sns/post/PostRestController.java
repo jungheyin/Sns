@@ -45,16 +45,19 @@ public class PostRestController {
 			HttpServletRequest request) {
 		
 		Map<String, Object> result = new HashMap<>();
+		
 		HttpSession session = request.getSession();
 		Integer userId = (Integer) session.getAttribute("userId");
+		String userLoginId = (String) session.getAttribute("userLoginId");
 		// 권한검사
 		if (userId == null) {
 			result.put("result", "error");
 			logger.error("[글쓰기] 로그인 세션이 없습니다.");
 			return result;
 		}
+		
 		// insert postBO
-		int row = postBO.createPost(userId, images, content);
+		int row = postBO.createPost(userId, userLoginId, images, content);
 		if (row > 0) {
 			result.put("result", "success");
 			

@@ -17,7 +17,7 @@ public class CommentRestController {
 	private CommentBO commentBO;
 	
 	@RequestMapping("/comment")
-	public Map<String, Object> createComent(
+	public Map<String, Object> createComment(
 			@RequestParam("userId") int userId,
 			@RequestParam("postId") int postId,
 			@RequestParam("content") String content) {

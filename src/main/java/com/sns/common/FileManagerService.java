@@ -16,12 +16,13 @@ public class FileManagerService {
 	
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
-	public final static String FILE_UPLOAD_PATH = "D:\\정혜인\\6_spring\\sns\\workspace\\images/";
+//	public final static String FILE_UPLOAD_PATH = "D:\\정혜인\\6_spring\\sns\\workspace\\images/";
+	public final static String FILE_UPLOAD_PATH = "C:\\Users\\user\\Desktop\\portfolio\\sns\\workspace\\images/";
 	
 	// 이미지 저장
-	public String saveFile(Integer userId, MultipartFile file) throws IOException {
+	public String saveFile(String userLoginId, MultipartFile file)  {
 		
-		String directoryName = userId + "_" + System.currentTimeMillis() + "/";
+		String directoryName = userLoginId + "_" + System.currentTimeMillis() + "/";
 		String filePath = FILE_UPLOAD_PATH + directoryName;
 		
 		File directory = new File(filePath);
@@ -32,15 +33,18 @@ public class FileManagerService {
 		}
 		
 		// 파일 업로드: byte 단위로 업로드한다.
-		byte[] bytes = file.getBytes();
-		Path path = Paths.get(filePath + file.getOriginalFilename()); // originalFilename: input에 올린 파일명
-		Files.write(path, bytes);
+		try {
+			byte[] bytes =file.getBytes();
+			Path path = Paths.get(filePath + file.getOriginalFilename());
+			Files.write(path, bytes);
+			
+			return "/images/" + directoryName + file.getOriginalFilename();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		
-		// 이미지 url path를 리턴 (WebMucConfig에서 매핑한 이미지 path)
-		
-		return "/images/" + directoryName + file.getOriginalFilename();
-	
+		return null;
 	}
 	
-	
+	// 이미지 삭제
 }
