@@ -46,7 +46,7 @@
 			<section>
 			<!-- 사진 미리보기 부분 -->
 				<div class=" d-flex justify-content-center mt-2" id="previewImg">
-				<!-- <img src="${contentView.post.images}" width="500px"  id="image"> -->
+				<img src="" width="500px"  id="image">
 				</div>
 				<!-- 내용 -->
 				<div class="d-flex justify-content-center mt-1">
@@ -89,7 +89,7 @@ $(document).ready(function() {
 					&& extension[extension.length - 1] != 'jpg'
 					&& extension[extension.length - 1] != 'png')) {
 			alert("이미지 파일만 업로드 할 수 있습니다.");
-			$('#file').val(''); // 비워주어야 한다.
+			$('#image').val(''); // 비워주어야 한다.
 			return;
 		}
 		
@@ -111,7 +111,7 @@ $(document).ready(function() {
 		let file = $('#file').val();
 		console.log(file);
 		
-		if (file != '') {
+	/* 	if (file != '') {
 			let ext = file.split('.').pop().toLowerCase();
 			if ($.inArray(ext, ['gif', 'png', 'jpg', 'jpeg'])== -1) {
 				alert("gif, png, jpg, jpeg파일만 업로드 할 수 있습니다.");
@@ -119,7 +119,7 @@ $(document).ready(function() {
 				$('#file').val('');
 				return;
 			}
-		}
+		} */
 			
 		
 		
