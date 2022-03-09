@@ -27,7 +27,7 @@ public class PostRestController {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired
-	public PostBO postBO;
+	private PostBO postBO;
 	
 	
 	@RequestMapping("/posts")
@@ -58,6 +58,7 @@ public class PostRestController {
 		
 		// insert postBO
 		int row = postBO.createPost(userId, userLoginId, images, content);
+		
 		if (row > 0) {
 			result.put("result", "success");
 			

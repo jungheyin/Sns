@@ -44,9 +44,9 @@
 				</a>
 			</div>
 			<section>
-			<!-- 사진 -->
-				<div class="d-flex justify-content-center mt-2" >
-					<img src="" width="500px"  id="image">
+			<!-- 사진 미리보기 부분 -->
+				<div class=" d-flex justify-content-center mt-2" id="previewImg">
+				<!-- <img src="${contentView.post.images}" width="500px"  id="image"> -->
 				</div>
 				<!-- 내용 -->
 				<div class="d-flex justify-content-center mt-1">
@@ -69,14 +69,43 @@ $(document).ready(function() {
 	});
 	
 	// 파일선택시 미리보기
-	$("#file").on("change", function(e) {
-		let tmp = e.target.files[0];
-		let img = URL.createObjectURL(tmp);
-	  $("#image").attr("src", img);
+	$('#file').on('change', function(e) {
+		
+		let file = $('#file').val();
+		console.log(file);
+		
+		// 미리보기
+		let fileImg = e.target.files[0]; // 이미지 선택
+		let img = URL.createObjectURL(fileImg); // 이미지 미리보기
+	  $('#image').attr('src', img);
+	  
+		let fileName = e.target.files[0].name; // 이미지 이름
+		let extension = fileName.split('.');
+		
+		// 확장자 유효성
+		if (extension.length < 2 || 
+				(extension[extension.length - 1] != 'gif'
+					&& extension[extension.length - 1] != 'jpeg'
+					&& extension[extension.length - 1] != 'jpg'
+					&& extension[extension.length - 1] != 'png')) {
+			alert("이미지 파일만 업로드 할 수 있습니다.");
+			$('#file').val(''); // 비워주어야 한다.
+			return;
+		}
+		
+		
 	});
 	
-	$('#svaeImg').on('click', function() {
+	// 글 저장
+	$('#svaeImg').on('click', function(e) {
 		$('#saveBtn').click();
+		
+		// 내용 부분
+		let content = $('#content').val();
+		if (content == '') {
+			alert("내용을 입력해 주세요.");
+			return;
+		}
 		
 		// 이미지 파일
 		let file = $('#file').val();
@@ -92,14 +121,11 @@ $(document).ready(function() {
 			}
 		}
 			
-		// 내용 부분
-		let content = $('#content').val();
-		if (content == '') {
-			alert("내용을 입력해 주세요.");
-			return;
-		}
 		
+		
+		// form태그 만들기
 		let formData = new FormData();
+		
 		formData.append("content", content);
 		formData.append("file", $('#file')[0].files[0]);
 		
@@ -108,12 +134,12 @@ $(document).ready(function() {
 			type: "POST"
 			, url: "/post/create"
 			, data: formData
-			, enctype: "multipart/form-data"
-			, processData: false
-			, contentType: false
+			, enctype: "multipart/form-data" //필수설정
+			, processData: false  // 필수설정
+			, contentType: false // 필수설정
 			, success: function(data) {
 				if (data.result == "success") {
-					location.href="/timeline/timeline_list_view"
+				 location.href="/timeline/timeline_list_view";
 				} else {
 					alert(data.errorMessage);
 				}
@@ -124,5 +150,6 @@ $(document).ready(function() {
 		});
 		
 	});
+	
 });
 </script>

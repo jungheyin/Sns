@@ -25,7 +25,8 @@ public class FileManagerService {
 		String directoryName = userLoginId + "_" + System.currentTimeMillis() + "/";
 		String filePath = FILE_UPLOAD_PATH + directoryName;
 		
-		File directory = new File(filePath);
+		// 디렉토리 만들기 
+		File directory = new File(filePath); // 파일 클레스
 		if (directory.mkdir() == false) {
 			// mkdir() : 파일 업로드 할 filePath 경로에 폴더(디렉토리) 생성
 			logger.error("[파일업로드] 디렉토리 생성 실패");
@@ -38,7 +39,7 @@ public class FileManagerService {
 			Path path = Paths.get(filePath + file.getOriginalFilename());
 			Files.write(path, bytes);
 			
-			return "/images/" + directoryName + file.getOriginalFilename();
+			return "/images/" + directoryName + file.getOriginalFilename(); 
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
