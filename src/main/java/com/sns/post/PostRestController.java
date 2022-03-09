@@ -40,7 +40,7 @@ public class PostRestController {
 	// TODO: POST를 추가하는 로직 필요!!
 	@PostMapping("/create")
 	public Map<String, Object> create(
-			@RequestParam(value="images", required=false) MultipartFile images,
+			@RequestParam(value="file", required=false) MultipartFile file,
 			@RequestParam("content") String content,
 			HttpServletRequest request) {
 		
@@ -57,13 +57,14 @@ public class PostRestController {
 		}
 		
 		// insert postBO
-		int row = postBO.createPost(userId, userLoginId, images, content);
+		int row = postBO.createPost(userId, userLoginId, file, content);
 		
 		if (row > 0) {
 			result.put("result", "success");
 			
 		} else {
 			result.put("result", "error");
+			result.put("errorMessage", "글쓰기 실패앴습니다.");
 			logger.error("[글쓰기] 글쓰기를 실패 했습니다.");
 			
 		}

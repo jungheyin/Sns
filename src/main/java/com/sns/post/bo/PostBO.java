@@ -28,14 +28,14 @@ public class PostBO {
 		return postDAO.selectPostList();
 	}
 	
-	public int createPost(int userId, String userLoginId, MultipartFile images, String content) {
+	public int createPost(int userId, String userLoginId, MultipartFile file, String content) {
 		// content 줄바꿈 적용
 		content = content.replace("\n", "<br>");
 		
 		// file이 있을경우 확인	
 		String imagePath = null;
-		if (images != null) {
-			imagePath = fileManager.saveFile(userLoginId, images);
+		if (file != null) {
+			imagePath = fileManager.saveFile(userLoginId, file);
 		}
 		
 		return postDAO.insertPost(userId, userLoginId, imagePath, content);

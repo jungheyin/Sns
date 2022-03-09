@@ -27,7 +27,7 @@
 					<h4 class="ml-2 mt-1 text-dark">${contentView.user.loginId}hi1856</h4> <!-- ${userLoginId} -->
 				</a>
 				<div class="mt-2 mr-2">
-					<button id="saveBtn" class="btn d-none">저장</button>
+					<button id="saveBtn" type="button" class="btn d-none">저장</button>
 						<img src="/staticImages/right.png" id="svaeImg" alt="앞으로가기" width="30px" height="30px">
 					</a>
 				</div>
